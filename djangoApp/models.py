@@ -27,7 +27,13 @@ class Course(models.Model):
 
 class Assignment(models.Model):
     name = models.CharField(max_length=64)
-    course = models.ManyToManyField(Course, related_name="assignment")
+    courses = models.ManyToManyField(Course, related_name="assignments")
 
     def __str__(self):
         return f"{self.name}"
+
+class Upload(models.Model):
+    upload = models.CharField(max_length=64)
+    grade = models.CharField(max_length=64)
+    students = models.ManyToManyField(Student, related_name="uploads")
+    assignments = models.ManyToManyField(Assignment, related_name="uploads")

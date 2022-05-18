@@ -79,12 +79,34 @@ class AssignmentSerializer(object):
     @staticmethod
     def convert_one(self):
 
-        assignment = Course.objects.filter(id=self.course_id)
-
         serialized_assignments = {
             "id": self.id,
             "name": self.name,
-            "assignment": CourseSerializer.convert_all(assignment)
+            "course": CourseSerializer.convert_all(self.courses.all()),
+
+        }
+
+        return serialized_assignments
+
+class UploadSerializer(object):
+    @staticmethod
+    def convert_all(self):
+        serialized_assignments = {"assignments": []}
+
+        for _ in self:
+            serialized_assignment = AssignmentSerializer.convert_one(_)
+            serialized_assignments["assignments"].append(serialized_assignment)
+
+        return serialized_assignments
+
+    @staticmethod
+    def convert_one(self):
+
+        serialized_assignments = {
+            "id": self.id,
+            "upload": self.upload,
+            "grade": self.grade,
+            "student": StudentSerializer.convert_all(self.students.all())
         }
 
         return serialized_assignments

@@ -7,6 +7,7 @@ urlpatterns = [
     path('students/<int:student_id>', views.student_detail, name="student_detail"),
     path('students/<int:student_id>/edit', views.student_edit, name="student_edit"),
     path('students/<int:student_id>/delete', views.student_delete, name="student_delete"),
+    path('students/upload', views.student_upload, name="student_upload"),
 
     path('courses/', views.course_list, name="course_list"),
     path('courses/new', views.course_new, name="course_new"),
@@ -19,6 +20,7 @@ urlpatterns = [
     path('professors/<int:professor_id>', views.professor_detail, name="professor_detail"),
     path('professors/<int:professor_id>/edit', views.professor_edit, name="professor_edit"),
     path('professors/<int:professor_id>/delete', views.professor_delete, name="professor_delete"),
+    path('upload/<int:upload_id>/<int:student_id>/rate', views.professor_upload, name="professor_upload"),
 
     path('assignments/', views.assignment_list, name="assignment_list"),
     path('assignments/new', views.assignment_new, name="assignment_new"),
