@@ -1,12 +1,26 @@
-from django.forms import ModelForm
+from django import forms
 from djangoApp.models import *
 
 
-class StudentForm(ModelForm):
-    model = Student
-    fields = ["name"]
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = "__all__"
 
 
-class CourseForm(ModelForm):
-    model = Course
-    fields = ["name", "description"]
+class CourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ["name", "description", "students", "professors"]
+
+
+class ProfessorForm(forms.ModelForm):
+    class Meta:
+        model = Professor
+        fields = '__all__'
+
+
+class AssignmentForm(forms.ModelForm):
+    class Meta:
+        model = Assignment
+        fields = '__all__'
