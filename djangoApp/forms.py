@@ -11,7 +11,7 @@ class StudentForm(forms.ModelForm):
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ["name", "description", "students", "professors"]
+        fields = '__all__'
 
 
 class ProfessorForm(forms.ModelForm):

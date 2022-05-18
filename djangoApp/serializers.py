@@ -38,7 +38,7 @@ class CourseSerializer(object):
     @staticmethod
     def convert_one(self):
         serialized_courses = {"id": self.id, "name": self.name, "description": self.description,
-                              "professor": ProfessorSerializer.convert_one(self.professors),
+                              "professor": ProfessorSerializer.convert_all(self.professors.all()),
                               "students": StudentSerializer.convert_all(self.students.all())}
         return serialized_courses
 
@@ -56,7 +56,7 @@ class ProfessorSerializer(object):
         return serialized_professors
 
     @staticmethod
-    def convert_one(self, add_nesting=True):
+    def convert_one(self):
         serialized_professor = {
             "id": self.id,
             "name": self.name,
@@ -77,14 +77,14 @@ class AssignmentSerializer(object):
         return serialized_assignments
 
     @staticmethod
-    def convert_one(self, add_nesting=True):
+    def convert_one(self):
 
-        course = Course.objects.filter(id=self.course_id)
+        assignment = Course.objects.filter(id=self.course_id)
 
         serialized_assignments = {
             "id": self.id,
             "name": self.name,
-            "course": CourseSerializer.convert_all(course)
+            "assignment": CourseSerializer.convert_all(assignment)
         }
 
         return serialized_assignments

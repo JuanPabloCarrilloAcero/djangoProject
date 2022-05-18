@@ -68,7 +68,7 @@ def course_new(request):
             data = json.load(request)
             form = CourseForm(data)
             if form.is_valid():
-                course = form.save(commit=True)+7
+                course = form.save(commit=True)
                 serialized_course = CourseSerializer().convert_one(course)
                 return JsonResponse(serialized_course, status=200)
             else:
@@ -107,7 +107,7 @@ def professor_new(request):
             form = ProfessorForm(data)
 
             if form.is_valid():
-                professor = form.save(commit=False)
+                professor = form.save(commit=True)
                 serialized_professor = ProfessorSerializer().convert_one(professor)
                 return JsonResponse(serialized_professor, status=200)
         else:
